@@ -36,26 +36,21 @@ const StoryTitle = styled.h1`
   }
 `;
 
-const StoryMeta = styled.div`
+const StoryDetails = styled.div`
   font-style: italic;
 
   > span:first-child {
     margin-right: 10px;
   }
 
-  > span:not(:first-child):before {
-    content: '•';
+  > span:last-child:before {
+    content: '🕛️';
     margin: 0 7px;
-  }
-
-  .story__meta-bold {
-    font-weight: bold;
   }
 `;
 
 const StoryMetaElement = styled.span`
   font-weight: bold;
-  color: ${(props) => props.color};
 `;
 
 const LoadingDiv = styled.div`
@@ -79,19 +74,16 @@ export default function Story({ id }: { id: number }) {
   }
 
   return (
-    <StoryWrapper data-testid='story'>
+    <StoryWrapper>
       <StoryTitle>
         <a href={story.url}>{story.title}</a>
       </StoryTitle>
-      <StoryMeta>
-        <span data-testid='story-by'>
-          <StoryMetaElement color='#000'>By:</StoryMetaElement> {story.by}
+      <StoryDetails>
+        <span>
+          <StoryMetaElement>By:</StoryMetaElement> {story.by}
         </span>
-        <span data-testid='story-time'>
-          <StoryMetaElement color='#000'>Posted:</StoryMetaElement> {` `}
-          {mapTime(story.time)}
-        </span>
-      </StoryMeta>
+        <span>{mapTime(story.time)}</span>
+      </StoryDetails>
     </StoryWrapper>
   );
 }
