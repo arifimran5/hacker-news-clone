@@ -3,6 +3,12 @@ import LatestStories from './components/LatestStories';
 import TopStories from './components/TopStories';
 import styled, { createGlobalStyle } from 'styled-components';
 
+const Heading = styled.h1`
+  font-size: 2.5rem;
+  font-weight: bolder;
+  margin-bottom: 20px;
+`;
+
 const GlobalStyle = createGlobalStyle`
   html {
     -webkit-box-sizing: border-box;
@@ -35,15 +41,24 @@ const AppContainer = styled.main`
   margin: auto;
 `;
 
+const ButtonGroup = styled.div`
+  border: 2px solid #e4e4e4;
+  width: max-content;
+  border-radius: 3px;
+`;
+
 type ButtonDisabledProps = { disabled: boolean };
 const SingleButton = styled.button<ButtonDisabledProps>`
   padding-inline: 1.2em;
   padding-block: 0.4em;
   font-family: inherit;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-  background-color: ${(props) => (props.disabled ? '#e4e4e4' : '#fff')};
-  border: 1px solid ${(props) => (props.disabled ? '#e4e4e4' : '#000')};
-  border-radius: 3px;
+  background-color: ${(props) => (props.disabled ? '#3589ff' : '#fff')};
+  color: ${(props) => (props.disabled ? '#fff' : '#3589ff')};
+  font-weight: 600;
+  border: none;
+  width: 5em;
+  transition: background 100ms ease-in;
 `;
 
 function App() {
@@ -52,8 +67,8 @@ function App() {
     <>
       <GlobalStyle />
       <AppContainer>
-        <h1>Hacker News Stories</h1>
-        <div>
+        <Heading>Hacker News Stories</Heading>
+        <ButtonGroup>
           <SingleButton
             disabled={showLatest}
             onClick={() => setShowLatest(true)}
@@ -66,7 +81,7 @@ function App() {
           >
             Top
           </SingleButton>
-        </div>
+        </ButtonGroup>
         {showLatest ? <LatestStories /> : <TopStories />}
       </AppContainer>
     </>
